@@ -31,6 +31,7 @@ export class Options {
 
     static atrasos = {
         1: "1 dia",
-        2: "2 dias"
+        2: "2 dias",
+        3: "1 semana",
     }
 }

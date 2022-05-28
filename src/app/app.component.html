@@ -69,7 +69,7 @@
                 [(ngModel)]="lugarOcupado.outraPessoa" type="text" maxlength="40">
             </label>
           </div>
-          <button type="button" class="btn btn-outline-info style-button mt-2"
+          <button type="button" id="buttonVoltarDoLugarOcupacao" class="btn btn-outline-info style-button mt-2"
             (click)="voltarEtapa('posInicio')">Voltar</button>
           <button type="button" class="btn btn-outline-info float-right style-button mt-2"
             (click)="proximaEtapa('escolhaDaFrequencia')">Próximo</button>
@@ -95,8 +95,8 @@
               </label>
             </div>
           </div>
-          <button type="button" class="btn btn-outline-info style-button mt-2"
-            (click)="voltarEtapa('escolhaDoLugarDeOcupacao')">Voltar</button>
+          <!-- <button type="button" class="btn btn-outline-info style-button mt-2"
+            (click)="voltarEtapa('escolhaDoLugarDeOcupacao')">Voltar</button> -->
           <button type="button" class="btn btn-outline-info float-right style-button mt-2"
             (click)="proximaEtapa('escolhaDoLugarDeOcupacao', countPosicoes + 1, true)">Próximo</button>
         </div>
@@ -122,8 +122,8 @@
             <br />
             Depois dessa fase, você fará essas escolhas para cada uma das pessoas acima.
           </p>
-          <button type="button" class="btn btn-outline-info style-button mt-2"
-            (click)="voltarEtapa('escolhaDoLugarDeOcupacao')">Voltar</button>
+          <!-- <button type="button" class="btn btn-outline-info style-button mt-2"
+            (click)="voltarEtapa('escolhaDoLugarDeOcupacao')">Voltar</button> -->
           <button type="button" class="btn btn-outline-info float-right style-button mt-2"
             (click)="proximaEtapa('testeAB')">Próximo</button>
         </div>
@@ -137,7 +137,7 @@
         <div class="col-md-6">
           <div class="row justify-content-center">
             <button type="button" class="btn btn-outline-info button-custom-teste" (click)="escolherOpcao('A')">Você prefere
-              interagir com <span class="font-weight-bold">{{lugarOcupado.pessoa}}</span> por <span
+              interagir com <span class="font-weight-bold">{{lugarOcupado.pessoaEscolhida}}</span> por <span
                 class="font-weight-bold">{{condicaoDeInteracao.guess}}</span> minutos imediatamente?</button>
           </div>
           <div class="row justify-content-center">

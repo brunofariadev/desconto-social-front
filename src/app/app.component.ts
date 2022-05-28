@@ -17,7 +17,7 @@ declare var $: any;
 export class AppComponent {
   etapaCorrente = "inicio";
   // posicoes: number[] = [1, 2, 5, 10, 20, 50, 100];
-  posicoes: number[] = [1, 2];
+  posicoes: number[] = [1, 2, 5];
   countPosicoes: number = 0;
   posicaoCorrente: number;
   lugaresOcupados: LugarDeOcupacao[] = [];
@@ -50,6 +50,10 @@ export class AppComponent {
   }
 
   proximaEtapa(proximaEtapa: string, countPosicoes: number = 0, fimEtapaLugarOcupacao = false) {
+    if (proximaEtapa == "escolhaDoLugarDeOcupacao" && countPosicoes != 1) {
+      $("#buttonVoltarDoLugarOcupacao").hide();
+    }
+
     if (this.etapaCorrente == "escolhaDoLugarDeOcupacao") {
       if (!this.lugarOcupado.pessoa || (this.lugarOcupado.pessoa == "Outra pessoa" && !this.lugarOcupado.outraPessoa)) {
         alert("Por favor selecione ou digite uma pessoa para o lugar de ocupação");
