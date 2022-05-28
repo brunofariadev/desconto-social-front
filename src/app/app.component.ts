@@ -194,6 +194,7 @@ export class AppComponent {
 
   actionFormSuccess(despesa: any) {
     toastr.success("Teste finalizado com sucesso!");
+    window.location.reload();
   }
 
   actionsFormError(error: any) {
