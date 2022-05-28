@@ -54,16 +54,16 @@
           <br />
           <div *ngFor="let pessoa of pessoasAleatorias">
             <div class="form-check">
-              <input (change)="onPessoaChange(pessoa)" class="form-check-input" type="radio" name="radioLugarOcupacao"
-                id="radio-ocupacao-{{pessoa.value}}" value="pessoa.value" [checked]="false">
+              <input (change)="onPessoaChange(pessoa, $event)" class="form-check-input radioLugarOcupacao" type="radio"
+                name="radioLugarOcupacao" id="radio-ocupacao-{{pessoa.value}}" value="pessoa.value" [checked]="false">
               <label class="form-check-label" for="radio-ocupacao-{{pessoa.value}}">
                 {{pessoa.text}}
               </label>
             </div>
           </div>
           <div class="form-check">
-            <input (change)="onPessoaChange('')" class="form-check-input" type="radio" name="radioLugarOcupacao"
-              id="radio-ocupacao-8" value="pessoa.value" [checked]="false">
+            <input (change)="onPessoaChange('Outra pessoa', $event)" class="form-check-input radioLugarOcupacao" type="radio"
+              name="radioLugarOcupacao" id="radio-ocupacao-8" value="pessoa.value" [checked]="false">
             <label class="form-check-label" for="radio-ocupacao-8">
               Outra pessoa (Digite qual a relação que tem com essa pessoa): <input
                 [(ngModel)]="lugarOcupado.outraPessoa" type="text" maxlength="40">
@@ -87,7 +87,7 @@
           <br />
           <div *ngFor="let frequencia of frequencias">
             <div class="form-check">
-              <input (change)="onFrequenciaChange(frequencia)" class="form-check-input" type="radio"
+              <input (change)="onFrequenciaChange(frequencia)" class="form-check-input radioFrequencia" type="radio"
                 name="radioFrequencia" id="radio-frequencia-{{frequencia.value}}" value="frequencia.value"
                 [checked]="false">
               <label class="form-check-label" for="radio-frequencia-{{frequencia.value}}">
@@ -136,7 +136,7 @@
         <div class="col-md-3"></div>
         <div class="col-md-6">
           <div class="row justify-content-center">
-            <button type="button" class="btn btn-outline-info" (click)="escolherOpcao('A')">Você prefere
+            <button type="button" class="btn btn-outline-info button-custom-teste" (click)="escolherOpcao('A')">Você prefere
               interagir com <span class="font-weight-bold">{{lugarOcupado.pessoa}}</span> por <span
                 class="font-weight-bold">{{condicaoDeInteracao.guess}}</span> minutos imediatamente?</button>
           </div>
@@ -144,7 +144,7 @@
             <p class="style-text-2">ou</p>
           </div>
           <div class="row justify-content-center">
-            <button type="button" class="btn btn-outline-info" (click)="escolherOpcao('B')">100 minutos daqui a
+            <button type="button" class="btn btn-outline-info button-custom-teste" (click)="escolherOpcao('B')">100 minutos daqui a
               <span class="font-weight-bold">{{atraso.text}}?</span></button>
           </div>
           <!-- <button type="button" class="btn btn-outline-info style-button mt-2"

@@ -7,6 +7,8 @@ import { random } from './utils/numberUtils';
 import { UtilOptions } from './utils/util.options';
 import toastr from 'toastr';
 import { DashboardService } from './dashboard.service';
+declare var $: any;
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -24,6 +26,7 @@ export class AppComponent {
   pessoas: { value, text }[] = [];
   pessoasAleatorias: { value, text }[] = [];
   pessoasNaoEscolhidas: { value, text }[] = [];
+  pessoasJaEscolhidas: string[] = [];
 
   frequencias: { value, text }[] = [];
 
@@ -47,6 +50,25 @@ export class AppComponent {
   }
 
   proximaEtapa(proximaEtapa: string, countPosicoes: number = 0, fimEtapaLugarOcupacao = false) {
+    if (this.etapaCorrente == "escolhaDoLugarDeOcupacao") {
+      if (!this.lugarOcupado.pessoa || (this.lugarOcupado.pessoa == "Outra pessoa" && !this.lugarOcupado.outraPessoa)) {
+        alert("Por favor selecione ou digite uma pessoa para o lugar de ocupação");
+        return;
+      }
+      this.lugarOcupado.pessoa == "Outra pessoa" ?
+        this.pessoasJaEscolhidas.push(this.lugarOcupado.outraPessoa) :
+        this.pessoasJaEscolhidas.push(this.lugarOcupado.pessoa);
+      $(".radioLugarOcupacao").prop("checked", false);
+    }
+
+    if (this.etapaCorrente == "escolhaDaFrequencia") {
+      if (!this.lugarOcupado.frequencia) {
+        alert("Por favor selecione uma frequência");
+        return;
+      }
+      $(".radioFrequencia").prop("checked", false);
+    }
+
     if (proximaEtapa == "escolhaDoLugarDeOcupacao" && fimEtapaLugarOcupacao) {
       this.lugarOcupado.posicao = this.posicaoCorrente;
       this.lugaresOcupados.push(this.lugarOcupado);
@@ -102,11 +124,14 @@ export class AppComponent {
     this.etapaCorrente = etapaAnterior;
   }
 
-  onPessoaChange(pessoa: any) {
-    if (pessoa) {
-      this.lugarOcupado.pessoa = pessoa.text;
+  onPessoaChange(pessoa: any, event) {
+    const pessoaSelecionada = pessoa.text || pessoa;
+    if (pessoaSelecionada != "Outra pessoa" && this.pessoasJaEscolhidas.some(pessoaJaEscolhida => pessoaJaEscolhida == pessoaSelecionada)) {
+      $(event.target).prop("checked", false);
+      alert("Essa pessoa já foi escolhida, por favor selecione outra");
       return;
     }
+    this.lugarOcupado.pessoa = pessoaSelecionada;
   }
 
   onFrequenciaChange(frequencia: { value, text }) {
