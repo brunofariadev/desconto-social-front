@@ -28,6 +28,29 @@ export class DashboardService {
     return Object.assign(new DescontoSocial(), jsonDataToDescontoSocial);
   }
 
+  buscarDescontos(): Observable<DescontoSocial[]> {
+    let url = `${this.apiPath}`;
+    return this.http.get(url).pipe(
+      catchError(this.handleError),
+      map(this.jsonDataToDescontosSocial)
+    );
+  }
+
+  private jsonDataToDescontosSocial(jsonDataToDescontoSocial: any): DescontoSocial[] {
+    let descontos: DescontoSocial[] = [];
+    jsonDataToDescontoSocial.forEach(e => descontos.push(Object.assign(new DescontoSocial(), e)));
+    return descontos;
+  }
+
+  getDescontoSocialById(id: number): Observable<DescontoSocial> {
+    let url = `${this.apiPath}/${id}`;
+
+    return this.http.get(url).pipe(
+      catchError(this.handleError),
+      map(this.jsonDataToDescontoSocial)
+    );
+  }
+
   handleError(erro: any): Observable<any> {
     console.log("Erro na requisicao => ", erro)
     return throwError(erro);

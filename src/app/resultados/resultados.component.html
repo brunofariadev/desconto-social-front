@@ -1,0 +1,27 @@
+<div class="row mt-5">
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-body">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">Participante</th>
+                            <th scope="col">Gênero</th>
+                            <!-- <th scope="col">Last</th>
+                            <th scope="col">Handle</th> -->
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let desconto of descontosSocial" [routerLink]="[desconto.id]" style="cursor: pointer;">
+                            <th scope="row">{{desconto.participante}}</th>
+                            <td>Masculino</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+    <div class="col-md-2"></div>
+</div>

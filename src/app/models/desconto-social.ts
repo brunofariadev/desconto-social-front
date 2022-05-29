@@ -2,6 +2,7 @@ import { LugarDeOcupacao } from "./lugar-de-ocupacao.model";
 
 export class DescontoSocial {
     public interacoesPorLugarDeOcupacao: InteracaoPorLugarDeOcupacao[] = [];
+    public participante: number;
 
     public adicioneInteracao(interacaoPorLugarDeOcupacao: InteracaoPorLugarDeOcupacao): void {
         this.interacoesPorLugarDeOcupacao.push(interacaoPorLugarDeOcupacao);

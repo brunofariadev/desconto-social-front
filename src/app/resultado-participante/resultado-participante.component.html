@@ -1,0 +1,43 @@
+<div class="row mt-5">
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
+        <h4><span>Participante</span> {{descontoSocial.participante}}</h4>
+        <div *ngFor="let interacaoPorLugarDeOcupacao of descontoSocial.interacoesPorLugarDeOcupacao" class="card mb-4">
+            <div class="card-header">
+                Lugar de ocupação - <span class="font-weight-bold">Posição:</span>
+                {{interacaoPorLugarDeOcupacao.lugarDeOcupacao.posicao}} |
+                <span class="font-weight-bold">Pessoa:</span>
+                {{interacaoPorLugarDeOcupacao.lugarDeOcupacao.outraPessoa == "Outra pessoa" ?
+                interacaoPorLugarDeOcupacao.lugarDeOcupacao.outraPessoa -
+                interacaoPorLugarDeOcupacao.lugarDeOcupacao.pessoa :
+                interacaoPorLugarDeOcupacao.lugarDeOcupacao.pessoa }} |
+                <span class="font-weight-bold">Frequência:</span>
+                {{interacaoPorLugarDeOcupacao.lugarDeOcupacao.frequencia}}
+            </div>
+            <div class="card-body">
+                <div *ngFor="let interacaoPorAtraso of interacaoPorLugarDeOcupacao.interacoesPorAtraso">
+                    <span class="font-weight-bold">Atraso:</span> {{interacaoPorAtraso.atraso}} |
+                    <span class="font-weight-bold">Média:</span> {{interacaoPorAtraso.media}}
+                    <h6 class="card-title mt-2">Escolhas:</h6>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Tentativa</th>
+                                <th scope="col">Tipo da escolha</th>
+                                <th scope="col">Tempo variável</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let escolha of interacaoPorAtraso.escolhas">
+                                <th scope="row">{{escolha.tentativa}}</th>
+                                <td>{{escolha.tipoDaEscolha}}</td>
+                                <td>{{escolha.tempoVariavel}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-2"></div>
+</div>
