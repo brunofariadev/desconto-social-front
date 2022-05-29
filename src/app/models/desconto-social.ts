@@ -3,6 +3,9 @@ import { LugarDeOcupacao } from "./lugar-de-ocupacao.model";
 export class DescontoSocial {
     public interacoesPorLugarDeOcupacao: InteracaoPorLugarDeOcupacao[] = [];
     public participante: number;
+    public identificadorDoParticipante: string;
+    public idade: number;
+    public genero: string;
 
     public adicioneInteracao(interacaoPorLugarDeOcupacao: InteracaoPorLugarDeOcupacao): void {
         this.interacoesPorLugarDeOcupacao.push(interacaoPorLugarDeOcupacao);
@@ -23,7 +26,7 @@ export class InteracaoDeAtraso {
     // escolhas: Escolha[] = [];
 
     constructor(
-        readonly atraso: number,
+        readonly atraso: string,
         readonly media: number,
         readonly escolhas: Escolha[]
     ) {

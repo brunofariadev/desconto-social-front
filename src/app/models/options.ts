@@ -34,4 +34,10 @@ export class Options {
         2: "2 dias",
         3: "1 semana",
     }
+
+    static sexoEnum = {
+        1: "Masculino",
+        2: "Feminino",
+        3: "Outros"
+    }
 }

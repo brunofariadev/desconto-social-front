@@ -16,7 +16,9 @@ import toastr from 'toastr';
 })
 
 export class TesteComponent {
-  etapaCorrente = "inicio";
+  teste1 = "";
+  teste2 = 0;
+  etapaCorrente = "form";
   // posicoes: number[] = [1, 2, 5, 10, 20, 50, 100];
   posicoes: number[] = [1, 2, 5];
   countPosicoes: number = 0;
@@ -33,6 +35,8 @@ export class TesteComponent {
 
   atrasos: { value, text }[] = [];
 
+  sexos: { value, text }[] = [];
+
   condicaoDeInteracao: CondicaoInteracao;
   condicoesDeInteracoes: CondicaoInteracao[] = [];
   atraso: { value, text };
@@ -46,6 +50,7 @@ export class TesteComponent {
     this.pessoas = UtilOptions.getOptions(Options.pessoas);
     this.frequencias = UtilOptions.getOptions(Options.frequencias);
     this.atrasos = UtilOptions.getOptions(Options.atrasos);
+    this.sexos = UtilOptions.getOptions(Options.sexoEnum);
     this.lugarOcupado = new LugarDeOcupacao();
     this.descontoSocial = new DescontoSocial();
   }
@@ -161,7 +166,7 @@ export class TesteComponent {
     }
 
     this.interacaoPorLugarDeOcupacao.adicioneInteracaoPorAtraso(
-      new InteracaoDeAtraso(this.atraso.value, this.condicaoDeInteracao.media, this.condicaoDeInteracao.escolhas)
+      new InteracaoDeAtraso(this.atraso.text, this.condicaoDeInteracao.media, this.condicaoDeInteracao.escolhas)
     );
 
     const indiceDoProximoAtraso = Number(this.atraso.value + 1);
@@ -201,6 +206,10 @@ export class TesteComponent {
   actionsFormError(error: any) {
     toastr.error("Ocorreu um erro ao processar sua solicitação!");
     console.error("erro", error);
+  }
+
+  onSexoChange(sexo) {
+    this.descontoSocial.genero = sexo == "0" ? "" : this.sexos[Number(sexo) - 1].text;
   }
 
 }

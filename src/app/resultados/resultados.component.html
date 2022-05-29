@@ -8,14 +8,15 @@
                         <tr>
                             <th scope="col">Participante</th>
                             <th scope="col">Gênero</th>
-                            <!-- <th scope="col">Last</th>
-                            <th scope="col">Handle</th> -->
+                            <th scope="col">Idade</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let desconto of descontosSocial" [routerLink]="[desconto.id]" style="cursor: pointer;">
-                            <th scope="row">{{desconto.participante}}</th>
-                            <td>Masculino</td>
+                        <tr *ngFor="let desconto of descontosSocial" [routerLink]="[desconto.id]"
+                            style="cursor: pointer;">
+                            <th scope="row">{{desconto.identificadorDoParticipante}}</th>
+                            <td>{{desconto.genero}}</td>
+                            <td>{{desconto.idade}}</td>
                         </tr>
                     </tbody>
                 </table>
