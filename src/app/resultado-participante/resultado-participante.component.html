@@ -1,16 +1,18 @@
 <div class="row mt-5">
     <div class="col-md-2"></div>
     <div class="col-md-8">
-        <span style="font-size: 1.2rem;"><span class="font-weight-bold">Participante:</span> {{descontoSocial.identificadorDoParticipante}} - {{descontoSocial.genero}}, {{descontoSocial.idade}} anos </span>
-        <div *ngFor="let interacaoPorLugarDeOcupacao of descontoSocial.interacoesPorLugarDeOcupacao" class="card mt-2 mb-4">
+        <span style="font-size: 1.2rem;"><span class="font-weight-bold">Participante:</span>
+            {{descontoSocial.identificadorDoParticipante}} - {{descontoSocial.genero}}, {{descontoSocial.idade}} anos
+        </span>
+        <div *ngFor="let interacaoPorLugarDeOcupacao of descontoSocial.interacoesPorLugarDeOcupacao"
+            class="card mt-2 mb-4">
             <div class="card-header">
                 Lugar de ocupação - <span class="font-weight-bold">Posição:</span>
                 {{interacaoPorLugarDeOcupacao.lugarDeOcupacao.posicao}} |
                 <span class="font-weight-bold">Pessoa:</span>
-                {{interacaoPorLugarDeOcupacao.lugarDeOcupacao.outraPessoa == "Outra pessoa" ?
-                interacaoPorLugarDeOcupacao.lugarDeOcupacao.outraPessoa -
-                interacaoPorLugarDeOcupacao.lugarDeOcupacao.pessoa :
-                interacaoPorLugarDeOcupacao.lugarDeOcupacao.pessoa }} |
+                {{interacaoPorLugarDeOcupacao.lugarDeOcupacao.pessoa}}
+                {{interacaoPorLugarDeOcupacao.lugarDeOcupacao.pessoa == "Outra pessoa" ?
+                interacaoPorLugarDeOcupacao.lugarDeOcupacao.outraPessoa : '' }} |
                 <span class="font-weight-bold">Frequência:</span>
                 {{interacaoPorLugarDeOcupacao.lugarDeOcupacao.frequencia}}
             </div>
