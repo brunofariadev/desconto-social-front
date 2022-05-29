@@ -1,7 +1,7 @@
 <div class="row mt-5">
     <div class="col-md-2"></div>
     <div class="col-md-8">
-        <span style="font-size: 1.2rem;"><span class="font-weight-bold">Participante:</span>
+        <span *ngIf="descontoSocial.identificadorDoParticipante != null" style="font-size: 1.2rem;"><span class="font-weight-bold">Participante:</span>
             {{descontoSocial.identificadorDoParticipante}} - {{descontoSocial.genero}}, {{descontoSocial.idade}} anos
         </span>
         <div *ngFor="let interacaoPorLugarDeOcupacao of descontoSocial.interacoesPorLugarDeOcupacao"
