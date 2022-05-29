@@ -19,21 +19,21 @@ export class Options {
         7: "Não interajo com essa pessoa"
     }
 
-    // static atrasos = {
-    //     1: "1 dia",
-    //     2: "2 dias",
-    //     3: "1 semana",
-    //     4: "1 mês",
-    //     5: "2 meses",
-    //     6: "6 meses",
-    //     7: "1 ano"
-    // }
-
     static atrasos = {
         1: "1 dia",
         2: "2 dias",
         3: "1 semana",
+        4: "1 mês",
+        5: "2 meses",
+        6: "6 meses",
+        7: "1 ano"
     }
+
+    // static atrasos = {
+    //     1: "1 dia",
+    //     // 2: "2 dias",
+    //     // 3: "1 semana",
+    // }
 
     static sexoEnum = {
         1: "Masculino",
