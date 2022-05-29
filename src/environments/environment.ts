@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  // API_URL: 'https://desconto-social-api.herokuapp.com/'
-  API_URL: 'https://localhost:5001/'
+  API_URL: 'https://desconto-social-api.herokuapp.com/'
+  // API_URL: 'https://localhost:5001/'
 };
 
 /*
