@@ -6,7 +6,7 @@ export class CondicaoInteracao {
     private min = 0;
     private max = 100;
     private randomValues: number[];
-    private guessOut: number[] = [];
+    private guessOut: number[] = [0, 100];
     public media: number;
     public escolhas: Escolha[];
     private tentativa: number = 0;
