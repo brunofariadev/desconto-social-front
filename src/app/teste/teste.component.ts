@@ -19,12 +19,13 @@ export class TesteComponent {
   teste1 = "";
   teste2 = 0;
   etapaCorrente = "form";
-  posicoes: number[] = [1, 2, 5, 10, 20, 50, 100];
-  // posicoes: number[] = [1];
+  // posicoes: number[] = [1, 2, 5, 10, 20, 50, 100];
+  posicoes: number[] = [1, 2];
   countPosicoes: number = 0;
-  posicaoCorrente: number;
+  // posicaoCorrente: number;
   lugaresOcupados: LugarDeOcupacao[] = [];
-  lugarOcupado: LugarDeOcupacao;
+  // lugarOcupado: LugarDeOcupacao;
+  lugarOcupadoCorrente: LugarDeOcupacao;
 
   pessoas: { value, text }[] = [];
   pessoasAleatorias: { value, text }[] = [];
@@ -51,77 +52,106 @@ export class TesteComponent {
     this.frequencias = UtilOptions.getOptions(Options.frequencias);
     this.atrasos = UtilOptions.getOptions(Options.atrasos);
     this.sexos = UtilOptions.getOptions(Options.sexoEnum);
-    this.lugarOcupado = new LugarDeOcupacao();
+    // this.lugarOcupado = new LugarDeOcupacao();
+    this.lugarOcupadoCorrente = new LugarDeOcupacao()
     this.descontoSocial = new DescontoSocial();
+    this.lugaresOcupados = [];
   }
 
   proximaEtapa(proximaEtapa: string, countPosicoes: number = 0, fimEtapaLugarOcupacao = false) {
-    if (proximaEtapa == "escolhaDoLugarDeOcupacao" && countPosicoes != 1) {
-      $("#buttonVoltarDoLugarOcupacao").hide();
-    }
+    debugger;
+    // if (proximaEtapa == "escolhaDoLugarDeOcupacao" && countPosicoes != 1) {
+    //   $("#buttonVoltarDoLugarOcupacao").hide();
+    // }
 
-    if (this.etapaCorrente == "escolhaDoLugarDeOcupacao") {
-      if (!this.lugarOcupado.pessoa || (this.lugarOcupado.pessoa == "Outra pessoa" && !this.lugarOcupado.outraPessoa)) {
-        alert("Por favor selecione ou digite uma pessoa para o lugar de ocupação");
-        return;
-      }
-      this.lugarOcupado.pessoa == "Outra pessoa" ?
-        this.pessoasJaEscolhidas.push(this.lugarOcupado.outraPessoa) :
-        this.pessoasJaEscolhidas.push(this.lugarOcupado.pessoa);
-      $(".radioLugarOcupacao").prop("checked", false);
-    }
+    // if (this.etapaCorrente == "escolhaDoLugarDeOcupacao") {
+    //   if (!this.lugarOcupado.pessoa || (this.lugarOcupado.pessoa == "Outra pessoa" && !this.lugarOcupado.outraPessoa)) {
+    //     alert("Por favor selecione ou digite uma pessoa para o lugar de ocupação");
+    //     return;
+    //   }
+    //   this.lugarOcupado.pessoa == "Outra pessoa" ?
+    //     this.pessoasJaEscolhidas.push(this.lugarOcupado.outraPessoa) :
+    //     this.pessoasJaEscolhidas.push(this.lugarOcupado.pessoa);
+    //   $(".radioLugarOcupacao").prop("checked", false);
+    // }
 
     if (this.etapaCorrente == "escolhaDaFrequencia") {
-      if (!this.lugarOcupado.frequencia) {
+      if (!this.lugarOcupadoCorrente.frequencia) {
         alert("Por favor selecione uma frequência");
         return;
       }
       $(".radioFrequencia").prop("checked", false);
     }
 
-    if (proximaEtapa == "escolhaDoLugarDeOcupacao" && fimEtapaLugarOcupacao) {
-      this.lugarOcupado.posicao = this.posicaoCorrente;
-      this.lugaresOcupados.push(this.lugarOcupado);
-      console.log("this.lugaresOcupados", this.lugaresOcupados);
-      this.lugarOcupado = new LugarDeOcupacao();
-      this.condicaoDeInteracao = new CondicaoInteracao(50);
+    // if (proximaEtapa == "escolhaDoLugarDeOcupacao" && fimEtapaLugarOcupacao) {
+    //   this.lugarOcupado.posicao = this.posicaoCorrente;
+    //   this.lugaresOcupados.push(this.lugarOcupado);
+    //   console.log("this.lugaresOcupados", this.lugaresOcupados);
+    //   this.lugarOcupado = new LugarDeOcupacao();
+    //   this.condicaoDeInteracao = new CondicaoInteracao(50);
 
-    }
+    // }
 
-    if (proximaEtapa == "escolhaDoLugarDeOcupacao" && countPosicoes <= this.posicoes.length) {
+    // if (proximaEtapa == "escolhaDoLugarDeOcupacao" && countPosicoes <= this.posicoes.length) {
+    //   this.etapaCorrente = proximaEtapa;
+    //   this.countPosicoes = countPosicoes;
+    //   this.posicaoCorrente = this.posicoes[countPosicoes - 1];
+    //   this.ajustePessoas();
+    //   return;
+    // }
+
+    if (proximaEtapa == "escolhaDoLugarDeOcupacao") {
       this.etapaCorrente = proximaEtapa;
-      this.countPosicoes = countPosicoes;
-      this.posicaoCorrente = this.posicoes[countPosicoes - 1];
-      this.ajustePessoas();
+      // this.countPosicoes = countPosicoes;
+      // this.posicaoCorrente = this.posicoes[countPosicoes - 1];
+      this.crieLugaresDeOcupacao();
+      // this.ajustePessoas();
       return;
     }
 
-    if (proximaEtapa == "escolhaDoLugarDeOcupacao") {
+    if (proximaEtapa == "escolhaDaFrequencia" && countPosicoes <= this.posicoes.length) {
+      this.countPosicoes = countPosicoes;
+      this.lugarOcupadoCorrente = this.lugaresOcupados[countPosicoes - 1];
+      this.etapaCorrente = proximaEtapa;
+      return;
+    }
+
+    if (proximaEtapa == "escolhaDaFrequencia" && countPosicoes > this.posicoes.length) {
       this.etapaCorrente = "inicioDoTeste";
       return;
     }
 
     if (proximaEtapa == "testeAB") {
       this.countPosicoes = 0;
+      this.condicaoDeInteracao = new CondicaoInteracao(50);
       this.trocarLugarDeOcupacao(++this.countPosicoes);
     }
 
     this.etapaCorrente = proximaEtapa;
   }
 
+  crieLugaresDeOcupacao() {
+    this.lugaresOcupados = [];
+    for (const posicao of this.posicoes) {
+      const lugarDeOcupacao = new LugarDeOcupacao();
+      lugarDeOcupacao.posicao = posicao;
+      this.lugaresOcupados.push(lugarDeOcupacao);
+    }
+  }
+
   private trocarLugarDeOcupacao(posicao: number) {
-    this.lugarOcupado = this.lugaresOcupados.find(l => l.posicao == posicao);
-    this.interacaoPorLugarDeOcupacao = new InteracaoPorLugarDeOcupacao(this.lugarOcupado);
+    this.lugarOcupadoCorrente = this.lugaresOcupados.find(l => l.posicao == posicao);
+    this.interacaoPorLugarDeOcupacao = new InteracaoPorLugarDeOcupacao(this.lugarOcupadoCorrente);
     this.atraso = this.atrasos[0];
   }
 
-  private ajustePessoas() {
-    this.pessoasNaoEscolhidas = this.pessoas;
-    this.pessoasAleatorias = [];
-    for (let index = 0; index < this.pessoas.length; index++) {
-      this.pessoasAleatorias.push(this.obtenhaPessoaAleatoriamente());
-    }
-  }
+  // private ajustePessoas() {
+  //   this.pessoasNaoEscolhidas = this.pessoas;
+  //   this.pessoasAleatorias = [];
+  //   for (let index = 0; index < this.pessoas.length; index++) {
+  //     this.pessoasAleatorias.push(this.obtenhaPessoaAleatoriamente());
+  //   }
+  // }
 
   obtenhaPessoaAleatoriamente() {
     var indexPessoa = random(0, this.pessoasNaoEscolhidas.length - 1);
@@ -134,21 +164,23 @@ export class TesteComponent {
     this.etapaCorrente = etapaAnterior;
   }
 
-  onPessoaChange(pessoa: any, event) {
-    const pessoaSelecionada = pessoa.text || pessoa;
-    if (pessoaSelecionada != "Outra pessoa" && this.pessoasJaEscolhidas.some(pessoaJaEscolhida => pessoaJaEscolhida == pessoaSelecionada)) {
-      $(event.target).prop("checked", false);
-      alert("Essa pessoa já foi escolhida, por favor selecione outra");
-      return;
-    }
-    this.lugarOcupado.pessoa = pessoaSelecionada;
-  }
+  // onPessoaChange(pessoa: any, event) {
+  //   const pessoaSelecionada = pessoa.text || pessoa;
+  //   if (pessoaSelecionada != "Outra pessoa" && this.pessoasJaEscolhidas.some(pessoaJaEscolhida => pessoaJaEscolhida == pessoaSelecionada)) {
+  //     $(event.target).prop("checked", false);
+  //     alert("Essa pessoa já foi escolhida, por favor selecione outra");
+  //     return;
+  //   }
+  //   this.lugarOcupado.pessoa = pessoaSelecionada;
+  // }
 
   onFrequenciaChange(frequencia: { value, text }) {
-    this.lugarOcupado.frequencia = frequencia.text;
+    // this.lugarOcupado.frequencia = frequencia.text;
+    this.lugarOcupadoCorrente.frequencia = frequencia.text;
   }
 
   escolherOpcao(opcaoEscolhida: string) {
+    debugger;
     this.etapaCorrente = "";
     let continuarMostrandoOpcoes: boolean = true;
 

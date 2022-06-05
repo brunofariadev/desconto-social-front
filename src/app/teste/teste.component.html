@@ -45,8 +45,7 @@
             <br />
             Vamos começar?
           </p>
-          <button type="button" class="btn btn-outline-info style-button"
-            (click)="voltarEtapa('form')">Voltar</button>
+          <button type="button" class="btn btn-outline-info style-button" (click)="voltarEtapa('form')">Voltar</button>
           <button type="button" class="btn btn-outline-info float-right style-button"
             (click)="proximaEtapa('posInicio')">Iniciar</button>
         </div>
@@ -74,7 +73,7 @@
 
 
       <!-- EscolhaDoLugarDeOcupacao -->
-      <div class="row" [hidden]="etapaCorrente != 'escolhaDoLugarDeOcupacao'">
+      <!-- <div class="row" [hidden]="etapaCorrente != 'escolhaDoLugarDeOcupacao'">
         <div class="col-md-3"></div>
         <div class="col-md-6">
           Quem é a pessoa que ocupa o {{posicaoCorrente}}° lugar? Marque dentre as opções abaixo:
@@ -103,6 +102,49 @@
             (click)="proximaEtapa('escolhaDaFrequencia')">Próximo</button>
         </div>
         <div class="col-md-3"></div>
+      </div> -->
+      <div class="row" [hidden]="etapaCorrente != 'escolhaDoLugarDeOcupacao'">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+          <div *ngFor="let lugarDeOcupacao of lugaresOcupados">
+            <span class="text-info">Quem é a pessoa que ocupa o <span
+                class="font-weight-bold">{{lugarDeOcupacao.posicao}}° lugar</span>? Escreva nos espaços abaixo:</span>
+            <br />
+            <br />
+            <div class="form-group col-md-6">
+              <label for="grauDeRelacao">Grau de relação/interação (Ex.: mãe, amigo)</label>
+              <input type="text" class="form-control" id="grauDeRelacao" [(ngModel)]="lugarDeOcupacao.grauDeRelacao"
+                maxlength="40">
+            </div>
+            <div class="form-group col-md-6">
+              <label for="iniciaisDoNome">Iniciais do Nome (Ex.: Maria – MA)</label>
+              <input type="text" class="form-control" id="iniciaisDoNome" [(ngModel)]="lugarDeOcupacao.iniciaisDoNome"
+                maxlength="40">
+            </div>
+          </div>
+          <!-- <div *ngFor="let pessoa of pessoasAleatorias">
+            <div class="form-check">
+              <input (change)="onPessoaChange(pessoa, $event)" class="form-check-input radioLugarOcupacao" type="radio"
+                name="radioLugarOcupacao" id="radio-ocupacao-{{pessoa.value}}" value="pessoa.value" [checked]="false">
+              <label class="form-check-label" for="radio-ocupacao-{{pessoa.value}}">
+                {{pessoa.text}}
+              </label>
+            </div>
+          </div>
+          <div class="form-check">
+            <input (change)="onPessoaChange('Outra pessoa', $event)" class="form-check-input radioLugarOcupacao"
+              type="radio" name="radioLugarOcupacao" id="radio-ocupacao-8" value="pessoa.value" [checked]="false">
+            <label class="form-check-label" for="radio-ocupacao-8">
+              Outra pessoa (Digite qual a relação que tem com essa pessoa): <input
+                [(ngModel)]="lugarOcupado.outraPessoa" type="text" maxlength="40">
+            </label>
+          </div> -->
+          <button type="button" id="buttonVoltarDoLugarOcupacao" class="btn btn-outline-info style-button mt-2"
+            (click)="voltarEtapa('posInicio')">Voltar</button>
+          <button type="button" class="btn btn-outline-info float-right style-button mt-2"
+            (click)="proximaEtapa('escolhaDaFrequencia', 1)">Próximo</button>
+        </div>
+        <div class="col-md-3"></div>
       </div>
 
 
@@ -110,7 +152,7 @@
       <div class="row" [hidden]="etapaCorrente != 'escolhaDaFrequencia'">
         <div class="col-md-3"></div>
         <div class="col-md-6">
-          Com que frequência você interage com essa pessoa?
+          Com que frequência você interage com o(a) "{{lugarOcupadoCorrente.pessoaEscolhida}}"?
           <br />
           <br />
           <div *ngFor="let frequencia of frequencias">
@@ -126,11 +168,10 @@
           <!-- <button type="button" class="btn btn-outline-info style-button mt-2"
               (click)="voltarEtapa('escolhaDoLugarDeOcupacao')">Voltar</button> -->
           <button type="button" class="btn btn-outline-info float-right style-button mt-2"
-            (click)="proximaEtapa('escolhaDoLugarDeOcupacao', countPosicoes + 1, true)">Próximo</button>
+            (click)="proximaEtapa('escolhaDaFrequencia', countPosicoes + 1, true)">Próximo</button>
         </div>
         <div class="col-md-3"></div>
       </div>
-
 
       <!-- InicioDoTeste -->
       <div class="row" [hidden]="etapaCorrente != 'inicioDoTeste'">
@@ -141,14 +182,15 @@
             e você precisará realizar uma escolha dentre as opções.
             <br />
             <br />
-            As opções serão entre interagir durante uma quantidade de tempo imediatamente ou interagir com essa pessoa
-            por 100 minutos depois de um certo período.
+            As opções serão entre interagir durante uma quantidade de tempo imediatamente ou interagir com cada uma
+            dessas
+            pessoas imaginadas, por 100 minutos depois de um certo período.
             <br />
             <br />
-            Clique em cima da opção escolhida, entre a opção A ou B, e uma nova tela se abrirá com uma nova opção.
+            Clique em cima da opção escolhida, e uma nova tela se abrirá com uma nova opção.
             <br />
             <br />
-            Depois dessa fase, você fará essas escolhas para cada uma das pessoas acima.
+            Lembre-se que, você fará essas escolhas para cada uma das pessoas anteriormente.
           </p>
           <!-- <button type="button" class="btn btn-outline-info style-button mt-2"
               (click)="voltarEtapa('escolhaDoLugarDeOcupacao')">Voltar</button> -->
@@ -164,18 +206,18 @@
         <div class="col-md-3"></div>
         <div class="col-md-6">
           <div class="row justify-content-center">
-            <button type="button" class="btn btn-outline-info button-custom-teste" (click)="escolherOpcao('A')">Você
-              prefere
-              interagir com <span class="font-weight-bold">{{lugarOcupado.pessoaEscolhida}}</span> por <span
-                class="font-weight-bold">{{condicaoDeInteracao.guess}}</span> minutos imediatamente?</button>
+            <button type="button" class="btn btn-outline-info button-custom-teste" (click)="escolherOpcao('A')">
+              Você prefere interagir com "<span class="font-weight-bold">{{lugarOcupadoCorrente.pessoaEscolhida}}</span>"
+              por <span class="font-weight-bold">{{condicaoDeInteracao.guess}}</span> minutos imediatamente?
+            </button>
           </div>
           <div class="row justify-content-center">
             <p class="style-text-2">ou</p>
           </div>
           <div class="row justify-content-center">
-            <button type="button" class="btn btn-outline-info button-custom-teste" (click)="escolherOpcao('B')">100
-              minutos daqui a
-              <span class="font-weight-bold">{{atraso.text}}?</span></button>
+            <button type="button" class="btn btn-outline-info button-custom-teste" (click)="escolherOpcao('B')">
+              Você prefere interagir com 100 minutos daqui a <span class="font-weight-bold">{{atraso.text}}?</span>
+            </button>
           </div>
           <!-- <button type="button" class="btn btn-outline-info style-button mt-2"
               (click)="voltarEtapa('escolhaDaFrequencia')">Voltar</button>
