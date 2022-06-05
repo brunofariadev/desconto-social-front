@@ -14,7 +14,7 @@
             <input [(ngModel)]="descontoSocial.idade" type="number" class="form-control">
           </div>
           <div class="form-group">
-            <label for="sexo">Sexo</label>
+            <label for="sexo">Gênero</label>
             <select #mySelect name="sexo" id="sexo" class="form-control" (change)="onSexoChange(mySelect.value)">
               <option value="0">Selecione...</option>
               <option *ngFor="let sexo of sexos" [value]="sexo.value">{{sexo.text}}
