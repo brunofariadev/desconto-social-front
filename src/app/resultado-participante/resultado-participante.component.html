@@ -1,7 +1,8 @@
 <div class="row mt-5">
     <div class="col-md-2"></div>
     <div class="col-md-8">
-        <span *ngIf="descontoSocial.identificadorDoParticipante != null" style="font-size: 1.2rem;"><span class="font-weight-bold">Participante:</span>
+        <span *ngIf="descontoSocial.identificadorDoParticipante != null" style="font-size: 1.2rem;"><span
+                class="font-weight-bold">Participante:</span>
             {{descontoSocial.identificadorDoParticipante}} - {{descontoSocial.genero}}, {{descontoSocial.idade}} anos
         </span>
         <div *ngFor="let interacaoPorLugarDeOcupacao of descontoSocial.interacoesPorLugarDeOcupacao"
@@ -10,9 +11,8 @@
                 Lugar de ocupação - <span class="font-weight-bold">Posição:</span>
                 {{interacaoPorLugarDeOcupacao.lugarDeOcupacao.posicao}} |
                 <span class="font-weight-bold">Pessoa:</span>
-                {{interacaoPorLugarDeOcupacao.lugarDeOcupacao.pessoa}}
-                {{interacaoPorLugarDeOcupacao.lugarDeOcupacao.pessoa == "Outra pessoa" ?
-                interacaoPorLugarDeOcupacao.lugarDeOcupacao.outraPessoa : '' }} |
+                {{interacaoPorLugarDeOcupacao.lugarDeOcupacao.grauDeRelacao}} -
+                {{interacaoPorLugarDeOcupacao.lugarDeOcupacao.iniciaisDoNome}} |
                 <span class="font-weight-bold">Frequência:</span>
                 {{interacaoPorLugarDeOcupacao.lugarDeOcupacao.frequencia}}
             </div>

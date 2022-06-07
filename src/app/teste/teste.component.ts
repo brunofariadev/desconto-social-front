@@ -19,8 +19,8 @@ export class TesteComponent {
   teste1 = "";
   teste2 = 0;
   etapaCorrente = "form";
-  // posicoes: number[] = [1, 2, 5, 10, 20, 50, 100];
-  posicoes: number[] = [1, 2];
+  posicoes: number[] = [1, 2, 5, 10, 20, 50, 100];
+  // posicoes: number[] = [1, 2];
   countPosicoes: number = 0;
   // posicaoCorrente: number;
   lugaresOcupados: LugarDeOcupacao[] = [];
@@ -44,6 +44,8 @@ export class TesteComponent {
 
   descontoSocial: DescontoSocial;
   interacaoPorLugarDeOcupacao: InteracaoPorLugarDeOcupacao;
+  mensagemTela: string = "";
+  mostrarTelaPreta: boolean = false;
 
   constructor(
     private dashboardService: DashboardService
@@ -59,7 +61,6 @@ export class TesteComponent {
   }
 
   proximaEtapa(proximaEtapa: string, countPosicoes: number = 0, fimEtapaLugarOcupacao = false) {
-    debugger;
     // if (proximaEtapa == "escolhaDoLugarDeOcupacao" && countPosicoes != 1) {
     //   $("#buttonVoltarDoLugarOcupacao").hide();
     // }
@@ -141,6 +142,7 @@ export class TesteComponent {
 
   private trocarLugarDeOcupacao(posicao: number) {
     this.lugarOcupadoCorrente = this.lugaresOcupados.find(l => l.posicao == posicao);
+    this.mostreTelaPreta(this.lugarOcupadoCorrente.grauDeRelacao + " - " + this.lugarOcupadoCorrente.iniciaisDoNome);
     this.interacaoPorLugarDeOcupacao = new InteracaoPorLugarDeOcupacao(this.lugarOcupadoCorrente);
     this.atraso = this.atrasos[0];
   }
@@ -180,7 +182,6 @@ export class TesteComponent {
   }
 
   escolherOpcao(opcaoEscolhida: string) {
-    debugger;
     this.etapaCorrente = "";
     let continuarMostrandoOpcoes: boolean = true;
 
@@ -203,8 +204,9 @@ export class TesteComponent {
 
     const indiceDoProximoAtraso = Number(this.atraso.value + 1);
     if (indiceDoProximoAtraso <= this.atrasos.length) {
-      this.etapaCorrente = "testeAB";
       this.atraso = this.atrasos[indiceDoProximoAtraso - 1];
+      this.mostreTelaPreta(this.atraso.text);
+      this.etapaCorrente = "testeAB";
       this.condicaoDeInteracao = new CondicaoInteracao(50);
       return;
     }
@@ -217,10 +219,16 @@ export class TesteComponent {
       this.condicaoDeInteracao = new CondicaoInteracao(50);
       return;
     }
-
-    //chamar servico para salvar dados
     this.salvarDescontoSocial();
     this.etapaCorrente = "fimDasEtapas";
+  }
+
+  private mostreTelaPreta(mensagemTela: string) {
+    this.mostrarTelaPreta = true;
+    this.mensagemTela = mensagemTela;
+    setTimeout(() => {
+      this.mostrarTelaPreta = false;
+    }, 3000);
   }
 
   salvarDescontoSocial() {

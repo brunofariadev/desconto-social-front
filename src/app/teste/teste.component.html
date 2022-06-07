@@ -1,3 +1,19 @@
+<!-- <div *ngIf="mostrarTelaPreta" class="overlay">
+  <div class="d-flex justify-content-center">
+    <div class="msg">{{mensagemTela}}</div>
+  </div>
+</div> -->
+
+<div *ngIf="mostrarTelaPreta" class="msg">{{mensagemTela}}</div>
+<div *ngIf="mostrarTelaPreta" class="overlay">
+  <div class="d-flex justify-content-center">
+    <div class="lds-ripple">
+      <div></div>
+      <div></div>
+    </div>
+  </div>
+</div>
+
 <div id="content" style="padding-top: 150px;">
   <div class="card">
     <div class="card-body">
@@ -58,10 +74,18 @@
         <div class="col-md-3"></div>
         <div class="col-md-6">
           <p class="style-text">
-            Gostaria que você imaginasse uma lista de 100 pessoas mais próximas a você no mundo,
-            de forma que a primeira pessoa (1) seria aquela que você considera ser a mais querida e a pessoa na posição
-            100
-            alguém que pouco conhece.
+            No experimento a seguir será pedido a você que imagine que você fez uma lista de 100 pessoas mais próximas a
+            você no mundo, variando de seu amigo(a) ou parente mais querido na posição 1 até apenas um conhecido na
+            posição 100.
+            <br />
+            <br />
+            A pessoa número 1 seria alguém que você conhece bem e é alguém mais próximo a você.
+            <br />
+            <br />
+            A pessoa 100 pode ser alguém que você reconhece e encontra, mas talvez você pode nem saber o nome.
+            <br />
+            <br />
+            Você não precisa criar fisicamente a lista, mas imagine que você tenha feito isso.
           </p>
           <button type="button" class="btn btn-outline-info style-button"
             (click)="voltarEtapa('inicio')">Voltar</button>
@@ -113,13 +137,11 @@
             <br />
             <div class="form-group col-md-6">
               <label for="grauDeRelacao">Grau de relação/interação (Ex.: mãe, amigo)</label>
-              <input type="text" class="form-control" id="grauDeRelacao" [(ngModel)]="lugarDeOcupacao.grauDeRelacao"
-                maxlength="40">
+              <input type="text" class="form-control" [(ngModel)]="lugarDeOcupacao.grauDeRelacao" maxlength="40">
             </div>
             <div class="form-group col-md-6">
               <label for="iniciaisDoNome">Iniciais do Nome (Ex.: Maria – MA)</label>
-              <input type="text" class="form-control" id="iniciaisDoNome" [(ngModel)]="lugarDeOcupacao.iniciaisDoNome"
-                maxlength="40">
+              <input type="text" class="form-control" [(ngModel)]="lugarDeOcupacao.iniciaisDoNome" maxlength="2">
             </div>
           </div>
           <!-- <div *ngFor="let pessoa of pessoasAleatorias">
@@ -187,7 +209,7 @@
             pessoas imaginadas, por 100 minutos depois de um certo período.
             <br />
             <br />
-            Clique em cima da opção escolhida, e uma nova tela se abrirá com uma nova opção.
+            Clique em cima da opção escolhida, e novas opções de escolha serão apresentadas a você.
             <br />
             <br />
             Lembre-se que, você fará essas escolhas para cada uma das pessoas anteriormente.
@@ -207,7 +229,8 @@
         <div class="col-md-6">
           <div class="row justify-content-center">
             <button type="button" class="btn btn-outline-info button-custom-teste" (click)="escolherOpcao('A')">
-              Você prefere interagir com "<span class="font-weight-bold">{{lugarOcupadoCorrente.pessoaEscolhida}}</span>"
+              Você prefere interagir com "<span
+                class="font-weight-bold">{{lugarOcupadoCorrente.pessoaEscolhida}}</span>"
               por <span class="font-weight-bold">{{condicaoDeInteracao.guess}}</span> minutos imediatamente?
             </button>
           </div>
@@ -216,7 +239,9 @@
           </div>
           <div class="row justify-content-center">
             <button type="button" class="btn btn-outline-info button-custom-teste" (click)="escolherOpcao('B')">
-              Você prefere interagir com 100 minutos daqui a <span class="font-weight-bold">{{atraso.text}}?</span>
+              Você prefere interagir com "<span
+                class="font-weight-bold">{{lugarOcupadoCorrente.pessoaEscolhida}}</span>" por 100 minutos daqui a <span
+                class="font-weight-bold">{{atraso.text}}?</span>
             </button>
           </div>
           <!-- <button type="button" class="btn btn-outline-info style-button mt-2"

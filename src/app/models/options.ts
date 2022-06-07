@@ -10,7 +10,7 @@ export class Options {
     }
 
     static frequencias = {
-        1: "De 6 a 7 dias por semana",
+        1: "De 6 a 7 dias na semana",
         2: "De 3 a 5 dias na semana",
         3: "De 1 a 2 dias na semana",
         4: "1 a cada duas semanas",
@@ -18,21 +18,21 @@ export class Options {
         6: "Não interagi com essa pessoa nos últimos 6 meses"
     }
 
-    // static atrasos = {
-    //     1: "1 dia",
-    //     2: "2 dias",
-    //     3: "1 semana",
-    //     4: "1 mês",
-    //     5: "2 meses",
-    //     6: "6 meses",
-    //     7: "1 ano"
-    // }
-
     static atrasos = {
         1: "1 dia",
         2: "2 dias",
-        // 3: "1 semana",
+        3: "1 semana",
+        4: "1 mês",
+        5: "2 meses",
+        6: "6 meses",
+        7: "1 ano"
     }
+
+    // static atrasos = {
+    //     1: "1 dia",
+    //     2: "2 dias",
+    //     // 3: "1 semana",
+    // }
 
     static sexoEnum = {
         1: "Masculino",
