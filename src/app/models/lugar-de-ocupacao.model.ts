@@ -15,6 +15,6 @@ export class LugarDeOcupacao {
     // }
 
     public get pessoaEscolhida(): string {
-        return this.grauDeRelacao + " - " + this.iniciaisDoNome;
+        return this.iniciaisDoNome ? this.grauDeRelacao + " - " + this.iniciaisDoNome : this.grauDeRelacao;
     }
 }

@@ -102,9 +102,9 @@ export class TesteComponent {
     // }
 
     if (this.etapaCorrente == "escolhaDoLugarDeOcupacao") {
-      let lugaresDeOcupacaoNaoPreenchidos = this.lugaresOcupados.filter(l => !l.grauDeRelacao || !l.iniciaisDoNome);
+      let lugaresDeOcupacaoNaoPreenchidos = this.lugaresOcupados.filter(l => !l.grauDeRelacao);
       if (lugaresDeOcupacaoNaoPreenchidos.length > 0) {
-        alert("Para continuar você deve preencher todos os espaços.");
+        alert("Para continuar você deve preencher todos os campos referentes ao grau de relação.");
         return;
       }
     }
@@ -156,7 +156,7 @@ export class TesteComponent {
 
   private trocarLugarDeOcupacao(posicao: number) {
     this.lugarOcupadoCorrente = this.lugaresOcupados.find(l => l.posicao == posicao);
-    this.mostreTelaPreta(this.lugarOcupadoCorrente.grauDeRelacao + " - " + this.lugarOcupadoCorrente.iniciaisDoNome);
+    this.mostreTelaPreta(this.lugarOcupadoCorrente.pessoaEscolhida);
     this.interacaoPorLugarDeOcupacao = new InteracaoPorLugarDeOcupacao(this.lugarOcupadoCorrente);
     this.atraso = this.atrasos[0];
   }
