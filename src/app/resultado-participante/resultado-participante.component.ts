@@ -24,7 +24,7 @@ export class ResultadoParticipanteComponent implements OnInit {
       switchMap(params => this.dashboardService.getDescontoSocialById(Number(params.get("id"))))
     ).subscribe(descontoSocial => {
       this.descontoSocial = descontoSocial;
-      console.log(this.descontoSocial);
+      // console.log(this.descontoSocial);
     }, error => alert("Ocorreu um erro no servidor, por favor tente mais tarde."))
   }
 

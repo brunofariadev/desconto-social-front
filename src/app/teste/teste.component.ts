@@ -8,6 +8,7 @@ import { random } from '../utils/numberUtils';
 import { UtilOptions } from '../utils/util.options';
 declare var $: any;
 import toastr from 'toastr';
+import { sleepTime } from '../utils/SleepTime';
 
 @Component({
   selector: 'app-teste',
@@ -60,7 +61,7 @@ export class TesteComponent {
     this.lugaresOcupados = [];
   }
 
-  proximaEtapa(proximaEtapa: string, countPosicoes: number = 0, fimEtapaLugarOcupacao = false) {
+  async proximaEtapa(proximaEtapa: string, countPosicoes: number = 0, fimEtapaLugarOcupacao = false) {
     // if (proximaEtapa == "escolhaDoLugarDeOcupacao" && countPosicoes != 1) {
     //   $("#buttonVoltarDoLugarOcupacao").hide();
     // }
@@ -81,7 +82,6 @@ export class TesteComponent {
         alert("Por favor selecione uma frequência");
         return;
       }
-      $(".radioFrequencia").prop("checked", false);
     }
 
     // if (proximaEtapa == "escolhaDoLugarDeOcupacao" && fimEtapaLugarOcupacao) {
@@ -100,6 +100,20 @@ export class TesteComponent {
     //   this.ajustePessoas();
     //   return;
     // }
+
+    if (this.etapaCorrente == "escolhaDoLugarDeOcupacao") {
+      let lugaresDeOcupacaoNaoPreenchidos = this.lugaresOcupados.filter(l => !l.grauDeRelacao || !l.iniciaisDoNome);
+      if (lugaresDeOcupacaoNaoPreenchidos.length > 0) {
+        alert("Para continuar você deve preencher todos os espaços.");
+        return;
+      }
+    }
+
+    await this.mostreTelaPreta("", 1000, true);
+
+    if (this.etapaCorrente == "escolhaDaFrequencia") {
+      $(".radioFrequencia").prop("checked", false);
+    }
 
     if (proximaEtapa == "escolhaDoLugarDeOcupacao") {
       this.etapaCorrente = proximaEtapa;
@@ -181,10 +195,10 @@ export class TesteComponent {
     this.lugarOcupadoCorrente.frequencia = frequencia.text;
   }
 
-  escolherOpcao(opcaoEscolhida: string) {
+  async escolherOpcao(opcaoEscolhida: string) {
+    await this.mostreTelaPreta("", 500, true);
     this.etapaCorrente = "";
     let continuarMostrandoOpcoes: boolean = true;
-
     if (opcaoEscolhida == "A") {
       continuarMostrandoOpcoes = this.condicaoDeInteracao.escolheuInteragirImediatamente();
     }
@@ -212,7 +226,7 @@ export class TesteComponent {
     }
 
     this.descontoSocial.adicioneInteracao(this.interacaoPorLugarDeOcupacao);
-    console.info("this.descontoSocial", this.descontoSocial);
+    // console.info("this.descontoSocial", this.descontoSocial);
     if (++this.countPosicoes <= this.posicoes.length) {
       this.etapaCorrente = "testeAB";
       this.trocarLugarDeOcupacao(this.posicoes[this.countPosicoes - 1]);
@@ -223,12 +237,17 @@ export class TesteComponent {
     this.etapaCorrente = "fimDasEtapas";
   }
 
-  private mostreTelaPreta(mensagemTela: string) {
+  private async mostreTelaPreta(mensagemTela: string, timeInMs = 2500, ativarSleepTime = false) {
     this.mostrarTelaPreta = true;
     this.mensagemTela = mensagemTela;
-    setTimeout(() => {
+    if (!ativarSleepTime) {
+      setTimeout(() => {
+        this.mostrarTelaPreta = false;
+      }, timeInMs);
+    } else {
+      await sleepTime(timeInMs);
       this.mostrarTelaPreta = false;
-    }, 3000);
+    }
   }
 
   salvarDescontoSocial() {

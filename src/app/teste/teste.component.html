@@ -59,6 +59,10 @@
             Depois, serão feitas algumas perguntas sobre as interações sociais com essas pessoas.
             <br />
             <br />
+            Lembre-se que para todas as perguntas não há resposta certa ou errada. Seu sigilo está garantido ao longo de
+            toda a pesquisa.
+            <br />
+            <br />
             Vamos começar?
           </p>
           <button type="button" class="btn btn-outline-info style-button" (click)="voltarEtapa('form')">Voltar</button>
@@ -85,7 +89,14 @@
             A pessoa 100 pode ser alguém que você reconhece e encontra, mas talvez você pode nem saber o nome.
             <br />
             <br />
-            Você não precisa criar fisicamente a lista, mas imagine que você tenha feito isso.
+            Para 7 posições dessas, você será solicitado a colocar o seu grau de relação/interação (Ex.: pai, mãe,
+            irmãos, amigos(as),
+            colegas de escola, conhecidos, tios(as), padrinhos(as), avós(ôs), namorada(os), ficante, entre outras
+            interações) e a
+            frequência com que você interage com cada um deles.
+            <br />
+            <br />
+            Você não precisa criar fisicamente a lista completa, mas imagine que você tenha feito isso.
           </p>
           <button type="button" class="btn btn-outline-info style-button"
             (click)="voltarEtapa('inicio')">Voltar</button>
@@ -136,7 +147,7 @@
             <br />
             <br />
             <div class="form-group col-md-6">
-              <label for="grauDeRelacao">Grau de relação/interação (Ex.: mãe, amigo)</label>
+              <label for="grauDeRelacao">Grau de relação/interação</label>
               <input type="text" class="form-control" [(ngModel)]="lugarDeOcupacao.grauDeRelacao" maxlength="40">
             </div>
             <div class="form-group col-md-6">
@@ -174,7 +185,8 @@
       <div class="row" [hidden]="etapaCorrente != 'escolhaDaFrequencia'">
         <div class="col-md-3"></div>
         <div class="col-md-6">
-          Com que frequência você interage com o(a) "{{lugarOcupadoCorrente.pessoaEscolhida}}"?
+          Com que frequência você interage com o(a) "<span
+            class="font-weight-bold">{{lugarOcupadoCorrente.pessoaEscolhida}}</span>"?
           <br />
           <br />
           <div *ngFor="let frequencia of frequencias">
