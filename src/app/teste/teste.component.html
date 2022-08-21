@@ -147,7 +147,8 @@
             <br />
             <br />
             <div class="form-group col-md-6">
-              <label for="grauDeRelacao">Grau de relação/interação</label><span class="font-weight-bold text-danger"> *</span>
+              <label for="grauDeRelacao">Grau de relação/interação</label><span class="font-weight-bold text-danger">
+                *</span>
               <input type="text" class="form-control" [(ngModel)]="lugarDeOcupacao.grauDeRelacao" maxlength="40">
             </div>
             <div class="form-group col-md-6">
@@ -264,14 +265,17 @@
         <div class="col-md-3"></div>
       </div>
     </div>
-  </div>
-
-  <!-- FIM -->
-  <!-- <div class="row" [hidden]="etapaCorrente != 'fimDasEtapas'">
+    <!-- FIM -->
+    <div class="row" [hidden]="etapaCorrente != 'fimDasEtapas'">
       <div class="col-md-3"></div>
-      <div class="col-md-6">
-        <h3>FIM</h3>
+      <div class="col-md-6 text-center mb-4">
+        <h3>Atividade Finalizada. Obrigada!</h3>
+        <p class="style-text">
+          Chame a pesquisadora.
+        </p>
       </div>
       <div class="col-md-3"></div>
-    </div> -->
+    </div>
+  </div>
+
 </div>

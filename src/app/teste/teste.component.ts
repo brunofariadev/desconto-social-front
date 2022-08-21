@@ -20,8 +20,8 @@ export class TesteComponent {
   teste1 = "";
   teste2 = 0;
   etapaCorrente = "form";
-  posicoes: number[] = [1, 2, 5, 10, 20, 50, 100];
-  // posicoes: number[] = [1, 2];
+  // posicoes: number[] = [1, 2, 5, 10, 20, 50, 100];
+  posicoes: number[] = [1, 2];
   countPosicoes: number = 0;
   // posicaoCorrente: number;
   lugaresOcupados: LugarDeOcupacao[] = [];
@@ -234,12 +234,16 @@ export class TesteComponent {
       return;
     }
     this.salvarDescontoSocial();
-    this.etapaCorrente = "fimDasEtapas";
   }
 
   private async mostreTelaPreta(mensagemTela: string, timeInMs = 2500, ativarSleepTime = false) {
     this.mostrarTelaPreta = true;
     this.mensagemTela = mensagemTela;
+    if (mensagemTela != "") {
+      $(".overlay").css("opacity", "1");
+    } else {
+      $(".overlay").css("opacity", "0.4");
+    }
     if (!ativarSleepTime) {
       setTimeout(() => {
         this.mostrarTelaPreta = false;
@@ -259,7 +263,8 @@ export class TesteComponent {
 
   actionFormSuccess(despesa: any) {
     toastr.success("Teste finalizado com sucesso!");
-    window.location.reload();
+    this.etapaCorrente = "fimDasEtapas";
+    // window.location.reload();
   }
 
   actionsFormError(error: any) {
