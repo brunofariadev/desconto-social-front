@@ -20,8 +20,8 @@ export class TesteComponent {
   teste1 = "";
   teste2 = 0;
   etapaCorrente = "form";
-  // posicoes: number[] = [1, 2, 5, 10, 20, 50, 100];
-  posicoes: number[] = [1, 2];
+  posicoes: number[] = [1, 2, 5, 10, 20, 50, 100];
+  // posicoes: number[] = [1, 2];
   countPosicoes: number = 0;
   // posicaoCorrente: number;
   lugaresOcupados: LugarDeOcupacao[] = [];
