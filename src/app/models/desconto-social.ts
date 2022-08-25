@@ -24,13 +24,35 @@ export class InteracaoPorLugarDeOcupacao {
 
 export class InteracaoDeAtraso {
     // escolhas: Escolha[] = [];
+    readonly ordemAtraso: number;
 
     constructor(
         readonly atraso: string,
         readonly media: number,
         readonly escolhas: Escolha[]
     ) {
+        this.ordemAtraso = this.obterOrdemDoAtraso();
+    }
 
+    obterOrdemDoAtraso(): number {
+        switch (this.atraso) {
+            case "1 dia":
+                return 1;
+            case "2 dias":
+                return 2;
+            case "1 semana":
+                return 3;
+            case "1 mês":
+                return 4;
+            case "2 meses":
+                return 5;
+            case "6 meses":
+                return 6;
+            case "1 ano":
+                return 7;
+            default:
+                throw new Error(`O atraso ${this.atraso} não existe`);
+        }
     }
 
     // public adicioneEscolha(tipoDaEscolha: TipoDaEscolha, tempoVariavel: number) {

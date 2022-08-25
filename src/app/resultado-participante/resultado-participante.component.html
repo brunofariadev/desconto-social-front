@@ -1,3 +1,11 @@
+<div *ngIf="mostrarLoading" class="overlay">
+    <div class="d-flex justify-content-center">
+        <div class="lds-ripple">
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+</div>
 <div class="row mt-5">
     <div class="col-md-2"></div>
     <div class="col-md-8">
@@ -5,6 +13,29 @@
                 class="font-weight-bold">Participante:</span>
             {{descontoSocial.identificadorDoParticipante}} - {{descontoSocial.genero}}, {{descontoSocial.idade}} anos
         </span>
+        <div class="card mt-2 mb-4" *ngIf="colunas && colunas.length > 0">
+            <div class="card-header">Resumo Geral</div>
+            <div class="card-body">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Relação</th>
+                            <th scope="col" *ngFor="let coluna of colunas">{{coluna.pessoa}}</th>
+                        </tr>
+                        <tr>
+                            <th scope="col">Posição</th>
+                            <th scope="col" *ngFor="let coluna of colunas">{{coluna.posicao}}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let linha of linhas">
+                            <th scope="row">{{linha.atraso}}</th>
+                            <td *ngFor="let media of linha.medias">{{media}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
         <div *ngFor="let interacaoPorLugarDeOcupacao of descontoSocial.interacoesPorLugarDeOcupacao"
             class="card mt-2 mb-4">
             <div class="card-header">

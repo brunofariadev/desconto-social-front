@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
 import { DashboardService } from '../dashboard.service';
 import { DescontoSocial } from '../models/desconto-social';
+import toastr from 'toastr';
 
 @Component({
   selector: 'app-resultado-participante',
@@ -11,6 +12,11 @@ import { DescontoSocial } from '../models/desconto-social';
 })
 export class ResultadoParticipanteComponent implements OnInit {
   descontoSocial: DescontoSocial;
+  colunas = [];
+  linhas = [];
+  mostrarLoading = false;
+  pessoas: string[] = [];
+  posicoes: string[] = [];
 
   constructor(
     private dashboardService: DashboardService,
@@ -19,13 +25,47 @@ export class ResultadoParticipanteComponent implements OnInit {
     this.descontoSocial = new DescontoSocial();
   }
 
+
+
   ngOnInit(): void {
+    this.mostrarLoading = true;
     this.route.paramMap.pipe(
       switchMap(params => this.dashboardService.getDescontoSocialById(Number(params.get("id"))))
     ).subscribe(descontoSocial => {
+      this.mostrarLoading = false;
       this.descontoSocial = descontoSocial;
-      // console.log(this.descontoSocial);
-    }, error => alert("Ocorreu um erro no servidor, por favor tente mais tarde."))
+      this.monteColunas();
+      this.monteResumo();
+    }, error => {
+      this.mostrarLoading = false;
+      toastr.error("Ocorreu um erro ao buscar os resultados, por favor tente novamente ou contate o suporte!");
+    })
+  }
+
+  monteColunas() {
+    for (const interacaoPorLugarDeOcupacao of this.descontoSocial.interacoesPorLugarDeOcupacao) {
+      this.colunas.push({
+        pessoa: interacaoPorLugarDeOcupacao.lugarDeOcupacao.grauDeRelacao,
+        posicao: interacaoPorLugarDeOcupacao.lugarDeOcupacao.posicao
+      });
+    }
+  }
+
+  monteResumo() {
+    const atrasos = this.descontoSocial.interacoesPorLugarDeOcupacao[0].interacoesPorAtraso.map(a => a.atraso);
+    const todasInteracoesPorAtraso = this.descontoSocial.interacoesPorLugarDeOcupacao.flatMap(o => o.interacoesPorAtraso);
+    for (const atraso of atrasos) {
+      let linha = {
+        atraso: atraso,
+        medias: []
+      };
+
+      const interacoes = todasInteracoesPorAtraso.filter(i => i.atraso == atraso);
+      for (const interacaoPorAtraso of interacoes) {
+        linha.medias.push(interacaoPorAtraso.media);
+      }
+      this.linhas.push(linha);
+    }
   }
 
 }
