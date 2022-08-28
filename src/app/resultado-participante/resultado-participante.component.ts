@@ -53,7 +53,7 @@ export class ResultadoParticipanteComponent implements OnInit {
 
   monteResumo() {
     const atrasos = this.descontoSocial.interacoesPorLugarDeOcupacao[0].interacoesPorAtraso.map(a => a.atraso);
-    const todasInteracoesPorAtraso = this.descontoSocial.interacoesPorLugarDeOcupacao.flatMap(o => o.interacoesPorAtraso);
+    const todasInteracoesPorAtraso = this.descontoSocial.interacoesPorLugarDeOcupacao.map(i => i.interacoesPorAtraso).reduce((a, b) => a.concat(b));
     for (const atraso of atrasos) {
       let linha = {
         atraso: atraso,
@@ -62,7 +62,7 @@ export class ResultadoParticipanteComponent implements OnInit {
 
       const interacoes = todasInteracoesPorAtraso.filter(i => i.atraso == atraso);
       for (const interacaoPorAtraso of interacoes) {
-        linha.medias.push(interacaoPorAtraso.media);
+        linha.medias.push(interacaoPorAtraso.media.toString().replace('.', ","));
       }
       this.linhas.push(linha);
     }
