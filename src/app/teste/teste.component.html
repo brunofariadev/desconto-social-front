@@ -22,15 +22,25 @@
         <div class="col-md-3"></div>
         <div class="col-md-6">
           <div class="form-group">
-            <label for="identificadorParticipante">Participante</label>
+            <label for="identificadorParticipante">Participante</label> <span class="font-weight-bold text-danger">
+              *</span>
             <input [(ngModel)]="descontoSocial.identificadorDoParticipante" type="text" class="form-control">
           </div>
           <div class="form-group">
+            <label for="dataDeNascimento">Data do nascimento</label> <span class="font-weight-bold text-danger">
+              *</span>
+            <p-calendar #dataNascimento id="dataDeNascimento" formControlName="dataDeNascimento" inputStyleClass="form-control"
+              dataType="string" dateFormat="dd/mm/yy" [locale]="ptBR" [showButtonBar]="true" [monthNavigator]="true"
+              [yearNavigator]="true" yearRange="1920:2022" [style]="{'width':'100%'}"
+              (onSelect)="changeDataNascimento(dataNascimento)">
+            </p-calendar>
+          </div>
+          <!-- <div class="form-group">
             <label for="idade">Idade</label>
             <input [(ngModel)]="descontoSocial.idade" type="number" class="form-control">
-          </div>
+          </div> -->
           <div class="form-group">
-            <label for="sexo">Gênero</label>
+            <label for="sexo">Gênero</label> <span class="font-weight-bold text-danger"> *</span>
             <select #mySelect name="sexo" id="sexo" class="form-control" (change)="onSexoChange(mySelect.value)">
               <option value="0">Selecione...</option>
               <option *ngFor="let sexo of sexos" [value]="sexo.value">{{sexo.text}}
@@ -78,7 +88,8 @@
         <div class="col-md-3"></div>
         <div class="col-md-6">
           <p class="style-text">
-            No experimento a seguir será pedido a você que imagine que você fez uma lista de 100 pessoas socialmente mais próximas a
+            No experimento a seguir será pedido a você que imagine que você fez uma lista de 100 pessoas socialmente
+            mais próximas a
             você no mundo, variando de seu amigo(a) ou parente mais querido na posição 1 até apenas um conhecido na
             posição 100.
             <br />

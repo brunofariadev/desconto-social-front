@@ -47,7 +47,17 @@ export class TesteComponent {
   interacaoPorLugarDeOcupacao: InteracaoPorLugarDeOcupacao;
   mensagemTela: string = "";
   mostrarTelaPreta: boolean = false;
-
+  ptBR = {
+    firstDayOfWeek: 0,
+    dayNames: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'],
+    dayNamesShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab'],
+    dayNamesMin: ['Do', 'Se', 'Te', 'Qu', 'Qu', 'Se', 'Sa'],
+    monthNames: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho',
+      'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
+    monthNamesShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+    today: 'Hoje',
+    clear: 'Limpar'
+  };
   constructor(
     private dashboardService: DashboardService
   ) {
@@ -61,7 +71,26 @@ export class TesteComponent {
     this.lugaresOcupados = [];
   }
 
+  changeDataNascimento(data) {
+    this.descontoSocial.dataDeNascimento = data.value;
+  }
+
   async proximaEtapa(proximaEtapa: string, countPosicoes: number = 0, fimEtapaLugarOcupacao = false) {
+    if (this.etapaCorrente == "form") {
+      if (!this.descontoSocial.identificadorDoParticipante) {
+        alert("Informe a descrição do participante!");
+        return;
+      }
+      if (!this.descontoSocial.dataDeNascimento) {
+        alert("Informe a data de nascimento!");
+        return;
+      }
+      if (!this.descontoSocial.genero) {
+        alert("Informe o gênero!");
+        return;
+      }
+
+    }
     // if (proximaEtapa == "escolhaDoLugarDeOcupacao" && countPosicoes != 1) {
     //   $("#buttonVoltarDoLugarOcupacao").hide();
     // }

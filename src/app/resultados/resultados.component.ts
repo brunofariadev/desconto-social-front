@@ -19,6 +19,9 @@ export class ResultadosComponent implements OnInit {
     this.dashboardService.buscarDescontos()
       .subscribe(descontos => {
         this.mostrarLoading = false;
+        descontos.forEach(d => {
+          d.dataDeNascimentoFormated = !d.dataDeNascimento ? "" : d.dataDeNascimento.toString().substring(0, d.dataDeNascimento.toString().lastIndexOf("T")).split("-").reverse().join("/")
+        })
         this.descontosSocial = descontos;
       },
         () => {

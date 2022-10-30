@@ -25,7 +25,11 @@ export class ResultadoParticipanteComponent implements OnInit {
     this.descontoSocial = new DescontoSocial();
   }
 
-
+  public getDataDeNascimentoFormated(dataDeNascimento: string): string {
+    if (!dataDeNascimento)
+      return "";
+    return dataDeNascimento.substring(0, dataDeNascimento.lastIndexOf("T")).split("-").reverse().join("/")
+  }
 
   ngOnInit(): void {
     this.mostrarLoading = true;
@@ -33,6 +37,7 @@ export class ResultadoParticipanteComponent implements OnInit {
       switchMap(params => this.dashboardService.getDescontoSocialById(Number(params.get("id"))))
     ).subscribe(descontoSocial => {
       this.mostrarLoading = false;
+      descontoSocial.dataDeNascimentoFormated = this.getDataDeNascimentoFormated(descontoSocial.dataDeNascimento.toString());
       this.descontoSocial = descontoSocial;
       this.monteColunas();
       this.monteResumo();

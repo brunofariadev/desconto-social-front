@@ -4,8 +4,11 @@ export class DescontoSocial {
     public interacoesPorLugarDeOcupacao: InteracaoPorLugarDeOcupacao[] = [];
     public participante: number;
     public identificadorDoParticipante: string;
+    public dataDeNascimento: Date;
     public idade: number;
     public genero: string;
+
+    public dataDeNascimentoFormated: string;
 
     public adicioneInteracao(interacaoPorLugarDeOcupacao: InteracaoPorLugarDeOcupacao): void {
         this.interacoesPorLugarDeOcupacao.push(interacaoPorLugarDeOcupacao);
