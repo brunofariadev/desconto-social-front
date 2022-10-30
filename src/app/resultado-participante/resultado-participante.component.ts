@@ -27,7 +27,7 @@ export class ResultadoParticipanteComponent implements OnInit {
 
   public getDataDeNascimentoFormated(dataDeNascimento: string): string {
     if (!dataDeNascimento)
-      return "";
+      return "não informado";
     return dataDeNascimento.substring(0, dataDeNascimento.lastIndexOf("T")).split("-").reverse().join("/")
   }
 
@@ -37,7 +37,7 @@ export class ResultadoParticipanteComponent implements OnInit {
       switchMap(params => this.dashboardService.getDescontoSocialById(Number(params.get("id"))))
     ).subscribe(descontoSocial => {
       this.mostrarLoading = false;
-      descontoSocial.dataDeNascimentoFormated = this.getDataDeNascimentoFormated(descontoSocial.dataDeNascimento.toString());
+      descontoSocial.dataDeNascimentoFormated = this.getDataDeNascimentoFormated(!descontoSocial.dataDeNascimento ? "" : descontoSocial.dataDeNascimento.toString());
       this.descontoSocial = descontoSocial;
       this.monteColunas();
       this.monteResumo();
